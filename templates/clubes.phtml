@@ -1,0 +1,28 @@
+<?php
+    require_once "templates/layout/header.phtml";
+
+foreach($clubes as $club) :?>
+
+<div class="container textx-center">
+
+<?php
+    echo '<h3 class="mx-5 mt-4 fst-italic text-body-tertiary">'. 'Club ' . $club->club. '</h3>';
+?>
+
+    <ul class="list-group list-group-horizontal mx-5 mt-2">
+        <li class="list-group-item fw-semibold" ><?php echo $club->club ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->fundacion ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->localidad ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->sede ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->contacto ?></li>
+        <div class="actions mx-3">
+            <a href="club/<?php $club->id_club ?>" type="button" class='btn btn-success btn-sm ml-auto'>Detalle...</a>
+        </div>
+    </ul>
+
+</div>
+
+<?php
+    endforeach ;
+    require_once "templates/layout/footer.phtml";
+?>
