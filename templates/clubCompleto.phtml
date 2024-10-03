@@ -1,0 +1,42 @@
+<?php
+    require_once "templates/layout/header.phtml";
+?>
+
+<div class="container textx-center">
+    <?php
+        echo '<h3 class="mx-5 mt-4 fst-italic text-body-tertiary">'. 'Club ' . $club->club. '</h3>';
+    ?>
+    <ul class="list-group list-group-horizontal mx-5 mt-2">
+        <li class="list-group-item fw-semibold" ><?php echo $club->club ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->fundacion ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->localidad ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->sede ?></li>
+        <li class="list-group-item fst-italic"><?php echo $club->contacto ?></li>
+    </ul>
+
+
+    <h3 class="mx-5 mt-4 fst-italic text-body-tertiary">Socios</h3>
+    <?php  foreach($socios as $socio) :?>
+    <ul class="list-group list-group-horizontal mx-5">
+        <li class="list-group-item fw-semibold" ><?php echo $socio->nombre ?></li>
+        <li class="list-group-item fst-italic"><?php echo $socio->apellido ?></li>
+        <li class="list-group-item fst-italic"><?php echo $socio->dni ?></li>
+    </ul>
+    <?php endforeach ; ?>
+    
+
+    <h3 class="mx-5 mt-4 fst-italic text-body-tertiary">Disciplinas</h3>
+    <?php  foreach($disciplinas as $disciplina) :?>
+    <ul class="list-group list-group-horizontal mx-5">
+        <li class="list-group-item fw-semibold" ><?php echo $disciplina->deporte ?></li>
+        <li class="list-group-item fst-italic"><?php echo $disciplina->direccion ?></li>
+        <li class="list-group-item fst-italic"><?php echo $disciplina->contacto ?></li>
+    </ul>
+    <?php endforeach ; ?>
+    
+</div>
+
+<?php
+    
+    require_once "templates/layout/footer.phtml";
+?>

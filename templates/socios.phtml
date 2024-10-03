@@ -1,0 +1,27 @@
+<?php
+    require_once "templates/layout/header.phtml";
+    require_once "app/controllers/clubes.controller.php";
+    $controller=new ClubesController();
+?>
+
+    <div class="container textx-center">
+    
+<?php
+    foreach($socios as $socio) :
+    $object=$controller->obtenerClubById($socio->id_club); 
+    $club=$object->club;
+?>
+
+        <ul class="list-group list-group-horizontal mx-5 mt-2">
+            <li class="list-group-item fw-semibold "><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-info-emphasis " 
+            href="Socios/<?php echo $socio->id_club ?>"><?php echo "Club " . $club ?></a></li>
+            <li class="list-group-item fst-italic" ><?php echo $socio->nombre ?></li>
+            <li class="list-group-item fst-italic"><?php echo $socio->apellido ?></li>
+            <li class="list-group-item fst-italic"><?php echo $socio->dni ?></li>
+        </ul>
+
+<?php
+    endforeach ;
+    require_once "templates/layout/footer.phtml";
+?>
+    </div>
