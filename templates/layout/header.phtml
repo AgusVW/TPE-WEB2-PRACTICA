@@ -10,28 +10,39 @@
 </head>
 <body>
 
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-        <h1><a class="navbar-brand fs-2 fw-bold opacity-75" href="Clubes"><?php echo $navUrl ?></a> </h1>
+            <h1><a class="navbar-brand fs-2 fw-bold opacity-75" href="Clubes"><?php echo $navUrl ?></a></h1>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse mx-2" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active fs-4 mx-2  focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" aria-current="page" href="Clubes">Clubes</a>
+                        <a class="nav-link active fs-4 mx-2 focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" aria-current="page" href="Clubes">Clubes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-4 mx-2  focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" href="Socios">Socios</a>
+                        <a class="nav-link fs-4 mx-2 focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" href="Socios">Socios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-4 mx-2  focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" href="Disciplinas">Disciplinas</a>
+                        <a class="nav-link fs-4 mx-2 focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" href="Disciplinas">Disciplinas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-4 mx-2  focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" href="Insertar">Insertar</a>
+                        <a class="nav-link fs-4 mx-2 focus-ring focus-ring-primary py-1 px-1 text-decoration-none border rounded-3" href="Insertar">Insertar</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                    <?php 
+                    if($this->user)
+                        echo '<a class="btn btn-primary mt-2" href="logout">Salir</a>';
+
+                    else
+                        echo '<a class="btn btn-primary mt-2" href="mostrarLogin">Login</a>';
+                    ?> 
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    

@@ -1,0 +1,54 @@
+<?php require_once "templates/layout/header.phtml";
+
+    $controller=new ClubesController($this->user);
+    $object=$controller->obtenerClubById($socio->id_club); 
+    $club=$object->club; ?> 
+ 
+    <h3 class="mt-3 fst-italic text-body-tertiary">Edite el socio </h3>
+    <form action="Editar/Socio/<?php echo $socio->id_socio ?>" method="POST" class="my-4">
+        <div class="row">
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input required name="nombre" value="<?php echo $socio->nombre ?>" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" required value="<?php echo $socio->apellido ?>" name="apellido" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label>DNI</label>
+                    <input type="number" required value="<?php echo $socio->dni ?>" name="dni" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Club Asociado</label>
+                    <select required name="id_club" class="form-control">
+                        <option value="<?php echo $socio->id_club ?>"><?php echo $club ?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <?php require_once "templates/layout/footer.phtml" ?>

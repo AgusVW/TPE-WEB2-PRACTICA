@@ -1,0 +1,52 @@
+<?php require_once "templates/layout/header.phtml";
+
+    $controller=new ClubesController($this->user);
+    $object=$controller->obtenerClubById($disciplina->id_club); 
+    $club=$object->club; ?>    
+    
+    <h3 class="mt-5 fst-italic text-body-tertiary">Edite la disciplina </h3>
+    <form action="Editar/Disciplina/<?php echo $disciplina->id_disciplina?>" method="POST" class="my-4">
+        <div class="row">
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label>Deporte</label>
+                    <input required name="deporte" value="<?php echo $disciplina->deporte ?>" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label>Direccion</label>
+                    <input type="text" required value="<?php echo $disciplina->direccion ?>" name="direccion" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Contacto</label>
+                    <input type="number" required value="<?php echo $disciplina->contacto ?>" name="contacto" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Club Asociado</label>
+                    <select required name="id_club" class="form-control">
+                        <option value="<?php echo $disciplina->id_club?>"><?php echo $club ?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <?php require_once "templates/layout/footer.phtml" ?>

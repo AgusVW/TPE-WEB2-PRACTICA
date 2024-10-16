@@ -1,12 +1,12 @@
 <?php
     require_once "templates/layout/header.phtml";
     require_once "app/controllers/clubes.controller.php";
-    $controller=new ClubesController();
+    $controller=new ClubesController($this->user);
     $object=$controller->obtenerClubById($id); 
     $club=$object->club;
 ?>
     <div class="container textx-center">
-    <h3 class="mx-5 mt-2 fst-italic text-body-tertiary"><?php echo "Club ". $club ?></h3>;
+    <h3 class="mx-5 mt-2 fst-italic text-body-tertiary"><?php echo "Club ". $club ?></h3>
 <?php
     foreach($sociosByClub as $socio) :
 ?>
@@ -15,8 +15,14 @@
             <li class="list-group-item fst-italic" ><?php echo $socio->nombre ?></li>
             <li class="list-group-item fst-italic"><?php echo $socio->apellido ?></li>
             <li class="list-group-item fst-italic"><?php echo $socio->dni ?></li>
+            <?php if($this->user) : ?>
+                <div class="actions mx-3">
+                    <a href="eliminarSocio/<?php echo $socio->id_socio ?>" type="button" class='btn btn-danger btn-sm ml-auto'>Eliminar</a>
+                </div>
+            <?php endif; ?>     
         </ul>
 
+   
 <?php
     endforeach ;
     require_once "templates/layout/footer.phtml";

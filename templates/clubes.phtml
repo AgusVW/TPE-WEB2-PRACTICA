@@ -3,7 +3,7 @@
 
 foreach($clubes as $club) :?>
 
-<div class="container textx-center">
+    <div class="container textx-center">
 
 <?php
     echo '<h3 class="mx-5 mt-4 fst-italic text-body-tertiary">'. 'Club ' . $club->club. '</h3>';
@@ -18,11 +18,20 @@ foreach($clubes as $club) :?>
         <div class="actions mx-3">
             <a href="Clubes/<?php echo $club->id_club ?>" type="button" class='btn btn-success btn-sm ml-auto'>Detalle...</a>
         </div>
+        <?php if($this->user) : ?>
+            <div class="actions ">
+                <a href="eliminarClub/<?php echo $club->id_club ?>" type="button" class='btn btn-danger btn-sm ml-auto'>Eliminar</a>
+            </div>
+            <div class="actions mx-3">
+                <a href="Editar/Club/<?php echo $club->id_club ?>" type="button" class='btn btn-primary btn-sm ml-auto'>Editar</a>
+            </div>
+        <?php endif; ?> 
     </ul>
 
-</div>
+    </div>
 
 <?php
     endforeach ;
     require_once "templates/layout/footer.phtml";
 ?>
+    

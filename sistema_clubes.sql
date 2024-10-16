@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-09-2024 a las 09:47:57
+-- Tiempo de generación: 17-10-2024 a las 00:58:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,6 +32,7 @@ CREATE TABLE `club` (
   `club` varchar(50) NOT NULL,
   `fundacion` date NOT NULL,
   `localidad` varchar(60) NOT NULL,
+  `sede` varchar(150) NOT NULL,
   `contacto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,9 +40,10 @@ CREATE TABLE `club` (
 -- Volcado de datos para la tabla `club`
 --
 
-INSERT INTO `club` (`id_club`, `club`, `fundacion`, `localidad`, `contacto`) VALUES
-(1, 'Independiente', '1984-07-12', 'Tandil', 29836474),
-(2, 'ferro', '1995-09-22', 'tandil', 24942883);
+INSERT INTO `club` (`id_club`, `club`, `fundacion`, `localidad`, `sede`, `contacto`) VALUES
+(1, 'Atletico Independiente', '1984-07-12', 'Tandil', 'Avenida Avellaneda 700', 29836474),
+(2, 'Ferrocarril Sud', '1995-09-22', 'Tandil', 'Avenida Del Valle 157', 24942883),
+(3, 'Santamarina ', '2024-09-03', 'Tandil', 'Avenida Rivadavia 450', 283999887);
 
 -- --------------------------------------------------------
 
@@ -51,8 +53,8 @@ INSERT INTO `club` (`id_club`, `club`, `fundacion`, `localidad`, `contacto`) VAL
 
 CREATE TABLE `disciplina` (
   `id_disciplina` int(11) NOT NULL,
-  `deporte` varchar(50) NOT NULL,
-  `direccion` varchar(55) NOT NULL,
+  `deporte` varchar(80) NOT NULL,
+  `direccion` varchar(100) NOT NULL,
   `contacto` int(11) NOT NULL,
   `id_club` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -62,7 +64,7 @@ CREATE TABLE `disciplina` (
 --
 
 INSERT INTO `disciplina` (`id_disciplina`, `deporte`, `direccion`, `contacto`, `id_club`) VALUES
-(2, 'Futbol', 'Avellaneda 500', 2414324, 1),
+(2, 'Calistenia', 'Avellaneda 500', 2414324, 1),
 (4, 'Basquet', 'Avellaneda 500', 2414324, 1);
 
 -- --------------------------------------------------------
@@ -73,8 +75,8 @@ INSERT INTO `disciplina` (`id_disciplina`, `deporte`, `direccion`, `contacto`, `
 
 CREATE TABLE `socios` (
   `id_socio` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
+  `nombre` varchar(80) NOT NULL,
+  `apellido` varchar(80) NOT NULL,
   `dni` int(11) NOT NULL,
   `id_club` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -87,6 +89,25 @@ INSERT INTO `socios` (`id_socio`, `nombre`, `apellido`, `dni`, `id_club`) VALUES
 (3, 'Tobias', 'Vittor', 343424, 1),
 (4, 'Agustin', 'Van Waarde', 46901171, 1),
 (10, 'tito', 'en bloque', 412412, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `email` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `email`, `password`) VALUES
+(1, 'webadmin', '$2y$10$hdlTS53P7drcjWdaK362VuYmkHzAu9D5UF6UP2L1fwwukw7MXXgai');
 
 --
 -- Índices para tablas volcadas
@@ -110,7 +131,14 @@ ALTER TABLE `disciplina`
 --
 ALTER TABLE `socios`
   ADD PRIMARY KEY (`id_socio`),
-  ADD KEY `idClub` (`id_club`);
+  ADD KEY `idClub` (`id_club`) USING BTREE;
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -120,19 +148,25 @@ ALTER TABLE `socios`
 -- AUTO_INCREMENT de la tabla `club`
 --
 ALTER TABLE `club`
-  MODIFY `id_club` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_club` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `disciplina`
 --
 ALTER TABLE `disciplina`
-  MODIFY `id_disciplina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_disciplina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -142,13 +176,13 @@ ALTER TABLE `socios`
 -- Filtros para la tabla `disciplina`
 --
 ALTER TABLE `disciplina`
-  ADD CONSTRAINT `vincularClub` FOREIGN KEY (`id_club`) REFERENCES `club` (`id_club`);
+  ADD CONSTRAINT `vincularClub` FOREIGN KEY (`id_club`) REFERENCES `club` (`id_club`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `socios`
 --
 ALTER TABLE `socios`
-  ADD CONSTRAINT `idClub` FOREIGN KEY (`id_club`) REFERENCES `club` (`id_club`);
+  ADD CONSTRAINT `idClub` FOREIGN KEY (`id_club`) REFERENCES `club` (`id_club`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

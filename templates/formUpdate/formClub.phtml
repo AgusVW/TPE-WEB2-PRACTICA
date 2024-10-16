@@ -1,0 +1,51 @@
+<?php require_once "templates/layout/header.phtml" ?>
+    
+    <h3 class="mt-3 fst-italic text-body-tertiary">Edite el club </h3>
+        <form action="Editar/Club/<?php echo $club->id_club ?>" method="POST" class="my-4">
+            <div class="row">
+                <div class="col-5">
+                    <div class="form-group">
+                        <label>Club</label>
+                        <input required name="club" value="<?php echo $club->club ?>" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="form-group">
+                        <label>Localidad</label>
+                        <input type="text" required value="<?php echo $club->localidad ?>" name="localidad" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="form-group">
+                        <label>Fundacion</label>
+                        <input type="date" required value="<?php echo $club->fundacion ?>" name="fundacion" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-5">
+                    <div class="form-group">
+                        <label>Sede</label>
+                        <input required name="sede" value="<?php echo $club->sede ?>" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Contacto</label>
+                        <input type="number" required value="<?php echo $club->contacto ?>" name="contacto" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <?php require_once "templates/layout/footer.phtml" ?>

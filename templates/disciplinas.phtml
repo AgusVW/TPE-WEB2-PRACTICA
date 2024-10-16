@@ -1,7 +1,7 @@
 <?php
     require_once "templates/layout/header.phtml";
     require_once "app/controllers/clubes.controller.php";
-    $controller=new ClubesController();
+    $controller=new ClubesController($this->user);
 ?>
 
     <div class="container textx-center">
@@ -18,8 +18,17 @@
             <li class="list-group-item fst-italic" ><?php echo $disciplina->deporte ?></li>
             <li class="list-group-item fst-italic"><?php echo $disciplina->direccion ?></li>
             <li class="list-group-item fst-italic"><?php echo $disciplina->contacto ?></li>
+            <?php if($this->user) : ?>
+                <div class="actions mx-3">
+                    <a href="eliminarDisciplina/<?php echo $disciplina->id_disciplina ?>" type="button" class='btn btn-danger btn-sm ml-auto'>Eliminar</a>
+                </div>
+                <div class="actions">
+                    <a href="Editar/Disciplina/<?php echo $disciplina->id_disciplina ?>" type="button" class='btn btn-primary btn-sm ml-auto'>Editar</a>
+                </div>
+            <?php endif; ?>    
         </ul>
 
+    
 <?php
     endforeach ;
     require_once "templates/layout/footer.phtml";
