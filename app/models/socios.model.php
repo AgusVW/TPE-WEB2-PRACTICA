@@ -1,11 +1,8 @@
 <?php
-    class SociosModel{
-        private $db;
+    require_once 'app/models/deploy.model.php';
 
-        public function __construct(){
-            $this->db = new PDO('mysql:host=localhost;dbname=sistema_clubes;charset=utf8', 'root', '');        
-        }
-
+    class SociosModel extends Model{
+       
         public function getSocios(){
             $query=$this->db->prepare('SELECT * FROM socios');
             $query->execute();

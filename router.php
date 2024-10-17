@@ -6,7 +6,6 @@ require_once "app/controllers/socios.controller.php";
 require_once "app/controllers/disciplinas.controller.php";
 require_once "app/controllers/auth.controller.php";
 
-
 // base_url para redirecciones y base tag
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 

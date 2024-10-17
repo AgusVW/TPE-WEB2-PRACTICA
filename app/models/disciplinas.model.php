@@ -1,10 +1,7 @@
 <?php 
-    class DisciplinaModel{
-        private $db;
+    require_once 'app/models/deploy.model.php';
 
-        public function __construct(){
-            $this->db=new PDO('mysql:host=localhost;dbname=sistema_clubes;charset=utf8', 'root', ''); 
-        }
+    class DisciplinaModel extends Model{
 
         public function getDisciplinas(){
             $query=$this->db->prepare('SELECT * FROM disciplina');
